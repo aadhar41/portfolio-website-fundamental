@@ -7,24 +7,14 @@
 <section id="portfolio" class="container">
     <h2>Portfolio</h2>
     <div class="row">
-        <!-- Portfolio Item 1 -->
+        @foreach ($projects as $project)
+        <!-- Portfolio Item -->
         <div class="col-lg-4 col-md-6 portfolio-item">
-            <img src="https://placehold.co/600x400/png" alt="Project 1">
-            <h3>Project 1</h3>
-            <p>Description of project 1.</p>
+            <img src="{{ $project['image'] }}" alt="{{ $project['name'] }}">
+            <h3>{{ $project['name'] }}</h3>
+            <p>{{ $project['description'] }}</p>
         </div>
-        <!-- Portfolio Item 2 -->
-        <div class="col-lg-4 col-md-6 portfolio-item">
-            <img src="https://placehold.co/600x400/png" alt="Project 2">
-            <h3>Project 2</h3>
-            <p>Description of project 2.</p>
-        </div>
-        <!-- Portfolio Item 3 -->
-        <div class="col-lg-4 col-md-6 portfolio-item">
-            <img src="https://placehold.co/600x400/png" alt="Project 3">
-            <h3>Project 3</h3>
-            <p>Description of project 3.</p>
-        </div>
+        @endforeach
     </div>
 </section>
 
