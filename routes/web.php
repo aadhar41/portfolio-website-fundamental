@@ -31,4 +31,5 @@ Route::get('/home', HomeController::class)->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.submit');
 
