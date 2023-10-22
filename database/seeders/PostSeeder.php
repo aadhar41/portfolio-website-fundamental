@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 
 class PostSeeder extends Seeder
 {
@@ -21,6 +23,8 @@ class PostSeeder extends Seeder
                 'status' => 1,
                 'publish_date' => date('Y-m-d'),
                 'user_id' => 1,
+                'category_id' => Category::pluck('id')->random(),
+                'views' => rand(100, 500),
             ]);
         }
     }
