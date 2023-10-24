@@ -88,7 +88,7 @@
     <div class="container">
         <div class="row">
             <div class="error-code">404</div>
-            <div class="error-message">Route Not Found</div>
+            <div class="error-message">Not Found</div>
             <a href="/" class="home-link">Go to Home</a>
             <div class="animation-container">
                 <div class="road"></div>
