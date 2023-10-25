@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +17,24 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        // One to One relationship
+        // $users = User::all();
+        
+        // Inverse One to One relationship.
+        // $addresses = Address::all();
+
+        // One to Many relationship.
+        // $categories = Category::find(1)->posts;
+
+        
+        $posts = Post::with('tags')->get();
+        // $post = Post::first();
+        // $tag = Tag::first();
+        // $post->tags()->attach($tag);
+
+        return view('home', compact('posts'));
+
+        
         // DB::table('posts')->insert([
         //     'title' => 'This is a test data.',
         //     'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est neque numquam quod, aperiam vero blanditiis consequatur facere odio nulla maiores quis praesentium ipsa, alias repudiandae illo explicabo corporis soluta impedit.',
@@ -160,11 +181,11 @@ class HomeController extends Controller
         // ], 201);
 
         // Permanently Delete record.
-        $post = Post::withTrashed()->find(50)->forceDelete();
-        return response()->json([
-            "message" => "Post permanently delete.",
-            "data" => $post,
-        ], 201);
+        // $post = Post::withTrashed()->find(50)->forceDelete();
+        // return response()->json([
+        //     "message" => "Post permanently delete.",
+        //     "data" => $post,
+        // ], 201);
 
         // return view('home', compact('projects'));
     }

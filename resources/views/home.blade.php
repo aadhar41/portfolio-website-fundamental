@@ -6,25 +6,50 @@
 <!-- Portfolio Section -->
 <section id="portfolio" class="container">
     <h2>Portfolio</h2>
-    <div class="row">
-        @foreach ($projects as $project)
-            @if ($project['status'] == 1)
-                <!-- Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <img src="{{ $project['image'] }}" alt="{{ $project['name'] }}">
-                    <h3>{{ $project['name'] }}</h3>
-                    <p>{{ $project['description'] }}</p>
+    <div class="container">
+        <div class="row">
+            {{-- @foreach ($users as $user)
+            <div class="mb-5 col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://placehold.co/600x400" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $user->name }}</h5>
+                        <p class="card-text"> {{ $user->email }} </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@if($user->address) {{ $user->address->address }}  @endif</li>
+                    </ul>
                 </div>
-            @else
-                <!-- Portfolio Item -->
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <img src="{{ $project['image'] }}" alt="{{ $project['name'] }}">
-                    <h3>{{ $project['name'] }}</h3>
-                    <p>{{ $project['description'] }}</p>
-                    <p><button class="btn btn-warning" disabled="disabled">Pending...</button></p>
+            </div>
+            @endforeach --}}
+            {{-- @foreach ($addresses as $address)
+            <div class="mb-5 col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://placehold.co/600x400" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@if($address->user) {{ $address->user->name }} @endif</h5>
+                        <p class="card-text">{{ $address->address }}</p>
+                    </div>
                 </div>
-            @endif
-        @endforeach
+            </div>
+            @endforeach --}}
+            @foreach ($posts as $post)
+            <div class="mb-5 col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://placehold.co/600x400" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@if($post->title) {{ $post->title }} @endif</h5>
+                        <p class="card-text">{{ $post->description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        @foreach ($post->tags as $tag)
+                        <li class="list-group-item">{{ ($tag->name) }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
 </section>
 
