@@ -38,6 +38,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Submit</button>
                 </form>
+                <hr/>
+                <a name="download" id="download" class="btn btn-primary" href="{{route('download')}}" role="button">Download Image</a>
 
                 {{-- @foreach ($users as $user)
                             <div class="mb-5 col-sm">
