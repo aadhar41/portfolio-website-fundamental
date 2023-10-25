@@ -25,7 +25,25 @@
     <div class="container">
         <div class="row">
             {{-- <img src="{{ asset('/storage/images/chatting-1.jpg') }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="No-Image"> --}}
-            
+            <div class="row">
+                @foreach ($posts as $post)
+                {{-- <x-post.index :post="$post" /> --}}
+                <x-post.index>
+                    <x-slot name="title" >
+                        {{$post->title}}
+                    </x-slot>
+                    <x-slot name="image" >
+                        {{$post->image}}
+                    </x-slot>
+                    <x-slot name="description" >
+                        {{$post->description}}
+                    </x-slot>
+                    <x-slot name="category" >
+                        {{$post->category->name}}
+                    </x-slot>
+                </x-post.index>
+                @endforeach
+            </div>
             <div class="card p-5">
                 <form action="{{route('upload-file')}}" method="post" enctype="multipart/form-data">
                     @csrf
@@ -82,6 +100,7 @@
                     </div>
                     </div>
                     @endforeach --}}
+                    
             </div>
         </div>
     </div>
