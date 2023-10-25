@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,17 +27,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-// invoke Controller
 Route::get('/home', HomeController::class)->name('home');
 
-Route::post('/upload-file', [ImageController::class, 'handleImage'])->name('upload-file');
 
-Route::get('/download', [ImageController::class, 'download'])->name('download');
+Route::get('/posts/trash', [PostController::class, 'trashed'])->name('posts.trashed');
+Route::get('/posts/{post}/restore', [PostController::class, 'restore'])->name('posts.restore');
+Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
+Route::resource('posts', PostController::class);
 
-Route::get('/success', function() {
-    return '<h1>Successfully Uploaded.</h1>';
-})->name('success');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

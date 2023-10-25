@@ -23,6 +23,6 @@ class HomeController extends Controller
         // $posts = Post::all();
         // return response()->json($posts);
 
-        return view('home');
+        return view('posts.index');
     }
 }
