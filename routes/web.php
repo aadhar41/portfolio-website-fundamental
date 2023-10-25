@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
+
+use function PHPUnit\Framework\callback;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +29,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-// invoke Controller
 Route::get('/home', HomeController::class)->name('home');
-
-Route::post('/upload-file', [ImageController::class, 'handleImage'])->name('upload-file');
-
 Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact')->middleware('AuthCheckMiddleware2');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.submit');
+
+// Route::group(["middleware" => "AuthCheckMiddleware"], function() {
+    Route::get('/posts/trash', [PostController::class, 'trashed'])->name('posts.trashed');
+    Route::get('/posts/{post}/restore', [PostController::class, 'restore'])->name('posts.restore');
+    Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
+    Route::resource('posts', PostController::class);
+// });
+
+
 

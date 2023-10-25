@@ -23,7 +23,7 @@ class PostSeeder extends Seeder
                 'status' => 1,
                 'publish_date' => date('Y-m-d'),
                 'user_id' => 1,
-                'category_id' => Category::pluck('id')->random(),
+                // 'category_id' => Category::pluck('id')->random(),
                 'views' => rand(100, 500),
             ]);
         }
