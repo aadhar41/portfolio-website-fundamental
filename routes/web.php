@@ -8,6 +8,8 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 
+use function PHPUnit\Framework\callback;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,16 +30,17 @@ Route::get('/', function () {
 });
 
 Route::get('/home', HomeController::class)->name('home');
-
-
-Route::get('/posts/trash', [PostController::class, 'trashed'])->name('posts.trashed');
-Route::get('/posts/{post}/restore', [PostController::class, 'restore'])->name('posts.restore');
-Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
-Route::resource('posts', PostController::class);
-
-
 Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact')->middleware('AuthCheckMiddleware2');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.submit');
+
+// Route::group(["middleware" => "AuthCheckMiddleware"], function() {
+    Route::get('/posts/trash', [PostController::class, 'trashed'])->name('posts.trashed');
+    Route::get('/posts/{post}/restore', [PostController::class, 'restore'])->name('posts.restore');
+    Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
+    Route::resource('posts', PostController::class);
+// });
+
+
 

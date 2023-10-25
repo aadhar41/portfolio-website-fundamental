@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
+    
+    /**
+     * The function is a constructor that initializes a variable with an optional parameter.
+     * 
+     * @param Type var The parameter "var" is of type "Type" and is optional. It can be passed as an
+     * argument when creating an instance of the class, but if no argument is provided, it will default
+     * to null.
+     */
+    public function __construct() {
+        $this->middleware('AuthCheckMiddleware')->only(['create','store','update','destroy','restore','forceDelete']);
+    }
+
     /**
      * Display a listing of the resource.
      */
