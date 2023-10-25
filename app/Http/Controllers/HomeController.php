@@ -9,6 +9,9 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class HomeController extends Controller
 {
@@ -17,6 +20,9 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
+
+
+
         // One to One relationship
         // $users = User::all();
         
@@ -27,12 +33,24 @@ class HomeController extends Controller
         // $categories = Category::find(1)->posts;
 
         
-        $posts = Post::with('tags')->get();
+        // $posts = Post::with('tags')->get();
         // $post = Post::first();
         // $tag = Tag::first();
         // $post->tags()->attach($tag);
 
-        return view('home', compact('posts'));
+        // return view('home', compact('posts'));
+
+        // Delete files from storage.
+        // Storage::disk('public')->delete('images/Screenshot 2023-01-24 201013.png');
+        // Storage::delete('images/Screenshot 2023-01-24 201013.png');
+
+        // Delete file using file facade.
+        // File::delete(storage_path('/app/public/images/screencapture-github-aadhar41-news-application-2023-03-22-21_04_13.png'));
+
+        // Delete using helper function.
+        // unlink(storage_path('/app/public/images/krishna.jpg'));
+
+        return view('home');
 
         
         // DB::table('posts')->insert([
