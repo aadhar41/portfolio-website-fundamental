@@ -50,7 +50,8 @@ class HomeController extends Controller
         // Delete using helper function.
         // unlink(storage_path('/app/public/images/krishna.jpg'));
 
-        return view('home');
+        $posts = Post::all();
+        return view('home', compact('posts'));
 
         
         // DB::table('posts')->insert([
