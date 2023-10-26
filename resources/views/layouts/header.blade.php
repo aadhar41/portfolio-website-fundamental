@@ -19,14 +19,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="nav-link" data-toggle="tooltip" data-placement="top" title="Logout"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- Jumbotron / Hero Section -->
-<div class="jumbotron text-center">
+{{-- <div class="jumbotron text-center">
     <h1>Welcome to My Portfolio</h1>
     <p>I'm a passionate <strong>web developer</strong> with a love for <strong>design</strong> and <strong>coding</strong>.</p>
     <a class="btn btn-primary btn-lg" href="#contact">Contact Me</a>
-</div>
+</div> --}}
