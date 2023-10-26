@@ -19,7 +19,7 @@ class PostController extends Controller
      * to null.
      */
     public function __construct() {
-        $this->middleware('AuthCheckMiddleware')->only(['create','store','update','destroy','restore','forceDelete']);
+        // $this->middleware('AuthCheckMiddleware')->only(['create','store','update','destroy','restore','forceDelete']);
     }
 
     /**
@@ -38,6 +38,11 @@ class PostController extends Controller
      */
     public function create()
     {
+        // Gate Method for authorize.
+        // $this->authorize('create-post');
+
+        // Policy Method for authorize.
+        $this->authorize('create', Post::class);
         $categories = Category::all();
         return view('posts.create', compact('categories'));
     }
@@ -47,6 +52,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // Gate Method for authorize.
+        // $this->authorize('create-post');
+
+        // Policy Method for authorize.
+        $this->authorize('create', Post::class);
         $request->validate([
             'image' => ['required','max:1000','min:50','image'],
             'title' => ['required','max:255'],
@@ -80,6 +90,12 @@ class PostController extends Controller
      */
     public function edit(Request $request, string $id)
     {
+        // Gate Method for authorize.
+        // $this->authorize('edit-post');
+
+        // Policy Method for authorize.
+        $this->authorize('update', Post::class);
+
         $categories = Category::all();
         $post = Post::findOrFail($id);
         return view('posts.edit', compact('post','categories'));
@@ -90,6 +106,12 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Gate Method for authorize.
+        // $this->authorize('edit-post');
+
+        // Policy Method for authorize.
+        $this->authorize('update', Post::class);
+
         $request->validate([
             'title' => ['required','max:255'],
             'category_id' => ['required','max:255'],
@@ -120,7 +142,13 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
+        // Gate Method for authorize.
+        // $this->authorize('delete-post');
+
+        // Policy Method for authorize.
         $post = Post::findOrFail($id);
+        $this->authorize('delete', $post);
+
         $post->delete();
         return redirect()->route('posts.index');
     }
@@ -134,7 +162,13 @@ class PostController extends Controller
      * as the request method, headers, and request data.
      */
     public function trashed(Request $request) {
+        // Gate Method for authorize.
+        // $this->authorize('delete-post');
+
+        // Policy Method for authorize.
         $posts = Post::onlyTrashed()->get();
+        $this->authorize('delete', $posts);
+
         return view('posts.trashed', compact('posts'));
     }
 
@@ -151,7 +185,13 @@ class PostController extends Controller
      * @return a redirect to the 'posts.trashed' route.
      */
     public function restore(Request $request, $id) {
+        // Gate Method for authorize.
+        // $this->authorize('delete-post');
+
+        // Policy Method for authorize.
         $post = Post::onlyTrashed()->findOrFail($id);
+        $this->authorize('delete', $post);
+        
         $post->restore();
         return redirect()->route('posts.trashed');
     }
@@ -169,7 +209,13 @@ class PostController extends Controller
      * @return a redirect to the 'posts.trashed' route.
      */
     public function forceDelete(Request $request, $id) {
+        // Gate Method for authorize.
+        // $this->authorize('delete-post');
+
+        // Policy Method for authorize.
         $post = Post::onlyTrashed()->findOrFail($id);
+        $this->authorize('delete', $post);
+
         File::delete(public_path($post->image));
         $post->forceDelete();
         return redirect()->back();

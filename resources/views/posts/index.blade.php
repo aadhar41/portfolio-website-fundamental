@@ -11,12 +11,21 @@
         <div class="card text-left mb-4">
           <div class="card-header">
             <ul class="nav nav-pills card-header-pills">
+              {{-- @can('create-post', $posts) --}}
+              @can('create', \App\Model\Post::class)
               <li class="nav-item mr-2">
                 <a class="nav-link active btn-success" href="{{route('posts.create')}}">Create</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link btn-warning active" href="{{route('posts.trashed')}}">Trashed</a>
               </li>
+              @endcan
+              {{-- @endcan
+              @can('delete-post', $posts) --}}
+              {{-- <li class="nav-item">
+                <a class="nav-link btn-warning active" href="{{route('posts.trashed')}}">Trashed</a>
+              </li> --}}
+              {{-- @endcan --}}
             </ul>
           </div>
           <div class="card-body">
@@ -48,12 +57,18 @@
                                 <td>
                                   <div class="d-flex">
                                     <a href="{{route('posts.show', $post->id)}}" class="btn btn-sm btn-success mr-1">Show</a>
+                                    @can('update', $post)
                                     <a href="{{route('posts.edit', $post->id)}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                                    @endcan
+                                 
+                                    @can('delete', $post)
                                     <form action="{{route('posts.destroy', $post->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                     </form>
+                                    @endcan
+                                    {{-- @endcan --}}
                                   </div>
                                 </td>
                             </tr>
