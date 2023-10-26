@@ -10,7 +10,7 @@ use App\Http\Controllers\PostController;
 use App\Mail\OrderShipped;
 use App\Models\Post;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Http\Request;
 use function PHPUnit\Framework\callback;
 
 /*
@@ -60,6 +60,35 @@ Route::get('send-mail', function() {
 
 
     dd('Success!! Mail Sent.');
+});
+
+
+Route::get('get-session', function(Request $request) {
+    // $data = session()->all();
+    $data = $request->session()->all();
+    // $data = $request->session()->get('_token');
+    dd($data);
+});
+
+
+Route::get('save-session', function(Request $request) {
+    $request->session()->put(['user_status' => 'logged_in']);
+    session(['user_ip' => '192.168.1.1','user_id' => '121']);
+    return redirect('get-session');
+});
+
+Route::get('destroy-session', function(Request $request) {
+    // $request->session()->forget(['user_id','user_status','user_ip']);
+    // session()->forget(['user_id','user_status','user_ip']);
+    // $request->session()->flush();
+    // session()->flush();
+    return redirect('get-session');
+});
+
+Route::get('flash-session', function(Request $request) {
+    $request->session()->flash('status', 'true');
+    // session()->flush();
+    return redirect('get-session');
 });
 
 
