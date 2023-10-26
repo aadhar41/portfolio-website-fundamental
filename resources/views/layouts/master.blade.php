@@ -111,6 +111,37 @@
         .custom-file {
             cursor: pointer;
         }
+
+        #navbarNav > ul > li:nth-child(5) > form > button {
+            display: inline-block;
+            height: 36px;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: none;
+            outline: none;
+            color: rgba(255,255,255,.5);
+            background: #343a40;
+            transition: all 0.3s ease;
+        }
+
+        #navbarNav > ul > li:nth-child(5) > form > button:hover {
+            display: inline-block;
+            height: 36px;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: none;
+            outline: none;
+            color: rgba(255,255,255,1);
+            background: #343a40;
+            transition: all 0.3s ease;
+            box-shadow: 0 -14px 0 2px rgb(78,90,90),
+        }
     </style>
 </head>
 <body>
