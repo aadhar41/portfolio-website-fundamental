@@ -18,11 +18,12 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
+            'image' => fake()->image(),
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
-            'status' => rand(0, 1),
-            'publish_date' => fake()->date(),
-            'user_id' => 1,
+            // 'status' => rand(0, 1),
+            // 'publish_date' => fake()->date(),
+            // 'user_id' => 1,
             'category_id' => Category::pluck('id')->random(),
             'views' => rand(0, 1000),
         ];

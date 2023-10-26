@@ -6,24 +6,10 @@
 <!-- Portfolio Section -->
 <section id="portfolio" class="container">
     <h2>Portfolio</h2>
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <strong>{{ $error }}</strong> 
-            </div>
-            
-            <script>
-              $(".alert").alert();
-            </script>
-        @endforeach
-    @else
-        
-    @endif
+   
     <div class="container">
         <div class="row">
+
             {{-- <img src="{{ asset('/storage/images/chatting-1.jpg') }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="No-Image"> --}}
             <div class="row">
                 @foreach ($posts as $post)
@@ -102,6 +88,7 @@
                     @endforeach --}}
                     
             </div>
+
         </div>
     </div>
 </section>

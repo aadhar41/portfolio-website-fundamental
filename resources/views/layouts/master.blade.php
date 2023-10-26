@@ -107,6 +107,10 @@
         .form-group label {
             font-weight: bold;
         }
+
+        .custom-file {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
