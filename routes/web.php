@@ -11,6 +11,8 @@ use App\Mail\OrderShipped;
 use App\Models\Post;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+
 use function PHPUnit\Framework\callback;
 
 /*
@@ -89,6 +91,11 @@ Route::get('flash-session', function(Request $request) {
     $request->session()->flash('status', 'true');
     // session()->flush();
     return redirect('get-session');
+});
+
+
+Route::get('forget-cache', function(Request $request) {
+    Cache::forget('posts');
 });
 
 
