@@ -22,28 +22,22 @@
         </header>
 
         <div style="padding: 20px;">
-            <h2>{{ $title }}</h2>
             <div>
-                <p>Hello Josephine Gaines,</p>
-                <p>We are excited to inform you that your post, titled <b>"{{ Str::headline($post->title) }},"</b> has been published.</p>
+                <p>Hello {{ $user->name }},</p>
+                <p>{{ $title }}</p>
+                <p>Your registration was successful, and you can now access all the features of our website.</p>
+                
                 <p>{{ $content }}</p>
-                <div class="card">
-                    <p class="mb-0">{{ $post->description }}</p>
-                </div>
+                <ul>
+                    <li>Logging in to your account</li>
+                    <li>Updating your profile information</li>
+                    <li>Exploring our awesome features</li>
+                </ul>
                 
-                <p>You can view your post by clicking the link below:</p>
-                {{-- <a href="{{ route('posts.show', $post->id) }}">View Your Post</a> --}}
-                @if(!empty($buttonText) && !empty($buttonUrl))
-                    <p>
-                        <a href="{{ $buttonUrl }}" style="background-color: <?= env('APP_THEME_BACKGROUND'); ?>; color: <?= env('APP_THEME_TEXT'); ?>; padding: 10px 20px; text-decoration: none; display: inline-block;">
-                            {{ $buttonText }}
-                        </a>
-                    </p>
-                @endif
+                <p>If you have any questions or need assistance, feel free to contact our support team.</p>
                 
-                <p>Thank you for sharing your content on our platform. We hope your post receives the attention it deserves!</p>
+                <p>Thank you for joining our community!</p>
             </div>
-
         </div>
 
         <footer style="background-color: #f4f4f4; padding: 10px; text-align: center; color: #777;">
