@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
@@ -8,8 +9,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Jobs\SendMail;
 use App\Mail\OrderShipped;
+use App\Mail\PostPublished;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,4 +67,23 @@ Route::get('user-data', function() {
     // return Auth::user();
     // return auth()->user()->email;
     return auth()->user();
+});
+
+Route::get('send-mail', function() {
+    // $post = Post::findOrFail(9);
+
+    SendMail::dispatch();
+
+    // For Checking E-mails in Browser.
+    // $post = Post::findOrFail(9);
+    // return new App\Mail\PostPublished($post);
+
+    dd('Success! E-mail dispatched.');
+    
+});
+
+Route::get('user-register', function() {
+    $user = User::findOrFail(11);
+    event(new UserRegistered($user));
+    dd('Welcome email Send.');
 });

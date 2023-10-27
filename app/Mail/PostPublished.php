@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,24 +11,24 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
-class OrderShipped extends Mailable
+class PostPublished extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject, $title, $content, $buttonText, $buttonUrl, $email;
-    public $post;
+    public $subject, $title, $content, $buttonText, $buttonUrl, $email, $post;
 
     /**
      * Create a new message instance.
      */
     public function __construct(Post $post)
     {
-        $this->subject = $subject = 'Hello';
-        $this->title = $title = 'Testing';
-        $this->content = $content = 'Lorem Ipsum';
-        $this->buttonText = $buttonText = 'Click';
-        $this->buttonUrl = $buttonUrl = '#';
+        $this->subject = $subject = 'Your Post Published Notification';
+        $this->title = $title = 'Post Published';
+        $this->content = $content = "Here's a brief description of your post:";
+        $this->buttonText = $buttonText = 'View Your Post';
+        $this->buttonUrl = $buttonUrl = "{{ route('posts.show', $post->id) }}";
         $this->email = $email = 'test@gmail.com';
         $this->post = $post;
     }
@@ -38,6 +39,7 @@ class OrderShipped extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            subject: 'Post Published',
             to: 'aadhar41@gmail.com',
             from: env('MAIL_FROM_ADDRESS'),
         );
@@ -49,7 +51,7 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
-        view: 'emails.order-shipped',
+            view: 'emails.post-published',
         );
     }
 
@@ -61,7 +63,7 @@ class OrderShipped extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromPath(public_path('storage\uploads\1698236932_IMG_20220830_220511.jpg')),
+            Attachment::fromPath(public_path($this->post->image)),
         ];
     }
 }
