@@ -16,6 +16,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use function PHPUnit\Framework\callback;
@@ -87,3 +88,9 @@ Route::get('user-register', function() {
     event(new UserRegistered($user));
     dd('Welcome email Send.');
 });
+
+// en, hi
+Route::get('greeting/{locale}', function($locale) {
+    App::setLocale($locale);
+    return view('greeting');
+})->name('greeting');
