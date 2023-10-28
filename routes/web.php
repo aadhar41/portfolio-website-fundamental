@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use function PHPUnit\Framework\callback;
 use App\DataTables\UsersDataTable;
+use App\Helpers\ImageFilter;
+// import the Intervention Image Manager Class
+use Intervention\Image\ImageManager;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,3 +99,11 @@ Route::get('greeting/{locale}', function($locale) {
     App::setLocale($locale);
     return view('greeting');
 })->name('greeting');
+
+// en, hi
+Route::get('image', function() {
+    // Image::configure(['driver' => 'imagick']);
+    $img = Image::make('pexels-cesar-perez-733745.jpg');
+    $img->filter(new ImageFilter(400, 50));
+    $img->save('pexels-cesar-perez-733745-2-filter.jpg', 80);
+})->name('image');
