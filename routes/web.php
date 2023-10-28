@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
@@ -12,8 +13,10 @@ use App\Jobs\SendMail;
 use App\Mail\OrderShipped;
 use App\Mail\PostPublished;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use function PHPUnit\Framework\callback;
@@ -79,3 +82,15 @@ Route::get('send-mail', function() {
     dd('Success! E-mail dispatched.');
     
 });
+
+Route::get('user-register', function() {
+    $user = User::findOrFail(11);
+    event(new UserRegistered($user));
+    dd('Welcome email Send.');
+});
+
+// en, hi
+Route::get('greeting/{locale}', function($locale) {
+    App::setLocale($locale);
+    return view('greeting');
+})->name('greeting');

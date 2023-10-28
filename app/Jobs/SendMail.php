@@ -16,12 +16,14 @@ class SendMail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $post;
+
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public function __construct(Post $post)
     {
-        //
+        $this->post = $post;
     }
 
     /**
@@ -29,7 +31,7 @@ class SendMail implements ShouldQueue
      */
     public function handle(): void
     {
-        $post = Post::findOrFail(9);
-        Mail::send(new PostPublished($post));
+        // $post = Post::findOrFail(9);
+        Mail::send(new PostPublished($this->post));
     }
 }
