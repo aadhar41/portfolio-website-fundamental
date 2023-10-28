@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(CategorySeeder::class);
         // $this->call(PostSeeder::class);0
-        User::factory(10)->create();
-        Category::factory(5)->create();
-        Post::factory(100)->create();
+        User::factory(5000)->create();
+        // Category::factory(5)->create();
+        // Post::factory(100)->create();
         // Address::factory(10)->create();
         // Tag::factory(5)->create();
         // PostTag::factory(100)->create();
