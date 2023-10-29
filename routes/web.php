@@ -28,6 +28,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\ImageManagerStatic as Image;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,3 +151,21 @@ Route::get('all-posts', function() {
     $posts = Post::paginate(10);
     return view('posts.posts', compact('posts'));
 })->name('all-posts');
+
+Route::get('/auth/redirect', function() {
+    return $githubUser = Socialite::driver('github')->redirect();
+})->name('github.login');
+
+Route::get('/auth/callback', function() {
+    $githubUser = Socialite::driver('github')->user();
+    // dd($githubUser);
+    $user = User::firstOrCreate([
+        'email' => $githubUser->email
+    ],[
+        'name' => $githubUser->name,
+        'password' => bcrypt(Str::random(24)),
+    ]);
+
+    Auth::login($user, true);
+    return redirect('/dashboard');
+})->name('github.callback');
