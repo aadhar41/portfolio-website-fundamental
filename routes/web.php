@@ -26,6 +26,8 @@ use App\Http\Controllers\CartController;
 // import the Intervention Image Manager Class
 use Intervention\Image\ImageManager;
 use Intervention\Image\ImageManagerStatic as Image;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,3 +126,27 @@ Route::get('/remove-item/{rowId}', [CartController::class, 'removeItem'])->name(
 Route::get('/wishlist-item/{rowId}', [CartController::class, 'wishlistItem'])->name('wishlist-item');
 
 Route::get('/add-to-wishlist/{productId}', [CartController::class, 'addToWishlist'])->name('add-to-wishlist');
+
+Route::get('/create-role', function() {
+    // $role = Role::create(['name' => 'admin']);
+    // return "Role Created";
+
+    // $user = auth()->user();
+    // $user->assignRole('publisher');
+    // $user->givePermissionTo('edit articles');
+    
+    // return $user->can('edit articles');
+
+    // return $user;
+})->name('create-role');
+
+Route::get('/create-permission', function() {
+    $permission = Permission::create(['name' => 'edit articles']);
+    return "Permission Created";
+})->name('create-permission');
+
+
+Route::get('all-posts', function() {
+    $posts = Post::paginate(10);
+    return view('posts.posts', compact('posts'));
+})->name('all-posts');
