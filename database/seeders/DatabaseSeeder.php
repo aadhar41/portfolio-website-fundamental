@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Product;
 // use App\Models\Address;
 // use App\Models\PostTag;
 // use App\Models\Tag;
@@ -30,7 +31,8 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(CategorySeeder::class);
         // $this->call(PostSeeder::class);0
-        User::factory(5000)->create();
+        // User::factory(5000)->create();
+        Product::factory(50)->create();
         // Category::factory(5)->create();
         // Post::factory(100)->create();
         // Address::factory(10)->create();

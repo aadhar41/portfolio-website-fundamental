@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "maatwebsite/excel": "^3.1",
+        "mindscms/laravelshoppingcart": "^2.1",
         "yajra/laravel-datatables": "^9.0"
     },
     "require-dev": {

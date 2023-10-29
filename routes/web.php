@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Cache;
 use function PHPUnit\Framework\callback;
 use App\DataTables\UsersDataTable;
 use App\Helpers\ImageFilter;
+use App\Http\Controllers\CartController;
 // import the Intervention Image Manager Class
 use Intervention\Image\ImageManager;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -107,3 +108,19 @@ Route::get('image', function() {
     $img->filter(new ImageFilter(400, 50));
     $img->save('pexels-cesar-perez-733745-2-filter.jpg', 80);
 })->name('image');
+
+Route::get('/shop', [CartController::class, 'shop'])->name('shop');
+
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+
+Route::get('/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('add-to-cart');
+
+Route::get('/qty-increase/{rowId}', [CartController::class, 'qtyIncrease'])->name('qty-increase');
+
+Route::get('/qty-decrease/{rowId}', [CartController::class, 'qtyDecrease'])->name('qty-decrease');
+
+Route::get('/remove-item/{rowId}', [CartController::class, 'removeItem'])->name('remove-item');
+
+Route::get('/wishlist-item/{rowId}', [CartController::class, 'wishlistItem'])->name('wishlist-item');
+
+Route::get('/add-to-wishlist/{productId}', [CartController::class, 'addToWishlist'])->name('add-to-wishlist');
